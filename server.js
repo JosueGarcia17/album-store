@@ -25,13 +25,10 @@ mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTop
 const db = mongoose.connection;
 
 db.on('error', (error) => { 
-    server.close();
     console.error(error)}
 );
 
-db.on('crash', () => {
-    server.close();
-})
+
 
 db.once('open', () => console.log('Database successfully connected'));
 
