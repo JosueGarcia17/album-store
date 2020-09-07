@@ -8,13 +8,13 @@ const albumRouter = require('./routes/albums');
 const indexRouter = require('./routes/index');
 
 app.use('/albums', albumRouter);
+app.use(expressLayouts);
 app.use('/', indexRouter);
 
-app.set('view-engine', 'ejs');
+app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
-app.use(expressLayouts);
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true}); 
@@ -33,7 +33,4 @@ db.once('open', () => console.log('Database successfully connected'));
 
 app.use(express.json());
 
-
-
- 
-app.listen(8000, () => console.log('Server started'));
+app.listen(7788, () => console.log('Server started'));
